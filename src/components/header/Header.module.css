@@ -1,0 +1,33 @@
+.header {
+    width: 100%;
+    text-align: center;
+    background: #e6a2ff;
+    padding-top: 20px;
+    position: relative;
+}
+.logo {
+    width: 70px;
+}
+
+.title {
+    font-size: 40px;
+    margin: 0;
+    padding-bottom: 15px;
+}
+
+.logout {
+    position: absolute;
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
+    boder: none;
+    border-radius: 10px;
+    background: black;
+    color: white;
+    left: 85%;
+}
+
+.logout:hover {
+    background: #aeb3ff;
+    font-weight: bold;
+}
