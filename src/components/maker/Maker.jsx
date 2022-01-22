@@ -3,6 +3,8 @@ import Footer from "../footer/Footer";
 import Header from "../header/Header";
 import styles from "./Maker.module.css";
 import { useNavigate } from "react-router-dom";
+import Create from "../create/Create";
+import ViewCard from "../viewCard/ViewCard";
 
 function Maker({ authService }) {
     const navigate = useNavigate();
@@ -19,9 +21,17 @@ function Maker({ authService }) {
     });
     return (
         <section className={styles.maker}>
-            <Header onLogout={onLogout} />
-            가우누데에에
-            <Footer />
+            <div className={styles.header}>
+                <Header onLogout={onLogout} />
+            </div>
+            <div className={styles.createAndPreview}>
+                <Create />
+                <ViewCard />
+            </div>
+
+            <div className={styles.footer}>
+                <Footer />
+            </div>
         </section>
     );
 }

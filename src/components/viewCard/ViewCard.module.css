@@ -1,0 +1,7 @@
+.preview {
+    background: pink;
+    flex-basis: 50%;
+}
+.title {
+    text-align: center;
+}

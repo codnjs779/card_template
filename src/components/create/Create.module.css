@@ -1,0 +1,7 @@
+.create {
+    background: yellow;
+    flex-basis: 50%;
+}
+.title {
+    text-align: center;
+}
