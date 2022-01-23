@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../footer/Footer";
 import Header from "../header/Header";
 import styles from "./Maker.module.css";
@@ -7,6 +7,41 @@ import Create from "../create/Create";
 import ViewCard from "../viewCard/ViewCard";
 
 function Maker({ authService }) {
+    const [card, setCard] = useState([
+        {
+            id: 1,
+            name: "chaewon1",
+            company: "none",
+            theme: "light",
+            title: "engineer",
+            email: "codnjs779@naver.com",
+            message: "hello ",
+            fileName: "chch",
+            fileURL: "chch.jpg",
+        },
+        {
+            id: 2,
+            name: "chaewon2",
+            company: "none",
+            theme: "light",
+            title: "engineer",
+            email: "codnjs779@naver.com",
+            message: "hello ",
+            fileName: "chch",
+            fileURL: "chch.jpg",
+        },
+        {
+            id: 3,
+            name: "chaewon3",
+            company: "none",
+            theme: "light",
+            title: "engineer",
+            email: "codnjs779@naver.com",
+            message: "hello ",
+            fileName: "chch",
+            fileURL: "chch.jpg",
+        },
+    ]);
     const navigate = useNavigate();
     const onLogout = () => {
         authService.logout();
@@ -25,8 +60,8 @@ function Maker({ authService }) {
                 <Header onLogout={onLogout} />
             </div>
             <div className={styles.createAndPreview}>
-                <Create />
-                <ViewCard />
+                <Create card={card} />
+                <ViewCard card={card} />
             </div>
 
             <div className={styles.footer}>
