@@ -5,7 +5,7 @@ import CardEdit_form from "../card/CardEdit_form";
 function Create({ card }) {
     return (
         <section className={styles.create}>
-            <h1 className={styles.title}>Card Create</h1>
+            <h1 className={styles.title}>Card Create</h1>{" "}
             {card.map((item) => (
                 <CardEdit_form item={item} />
             ))}

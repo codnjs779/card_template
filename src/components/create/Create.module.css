@@ -1,6 +1,10 @@
+@value makerWhite,makerLightGrey  from "../../common/colors.css";
+
 .create {
-    background: yellow;
+    background: makerWhite;
     flex-basis: 50%;
+    border-right: 1px solid makerLightGrey;
+    padding: 0.5em 2em;
 }
 .title {
     text-align: center;

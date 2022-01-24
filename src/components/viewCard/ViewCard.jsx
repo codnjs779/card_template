@@ -7,9 +7,12 @@ function ViewCard({ card }) {
     return (
         <section className={styles.preview}>
             <h1 className={styles.title}>Preview</h1>
-            {card.map((item) => (
-                <Card item={item} />
-            ))}
+            <ul className={styles.cards}>
+                {" "}
+                {card.map((item) => (
+                    <Card item={item} />
+                ))}
+            </ul>
         </section>
     );
 }
