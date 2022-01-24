@@ -7,7 +7,7 @@ import Create from "../create/Create";
 import ViewCard from "../viewCard/ViewCard";
 
 function Maker({ authService }) {
-    const [card, setCard] = useState([
+    const [cards, setCard] = useState([
         {
             id: 1,
             name: "chaewon1",
@@ -54,14 +54,18 @@ function Maker({ authService }) {
             }
         });
     });
+    const addCard = (card) => {
+        const update = [...cards, card];
+        setCard(update);
+    };
     return (
         <section className={styles.maker}>
             <div className={styles.header}>
                 <Header onLogout={onLogout} />
             </div>
             <div className={styles.createAndPreview}>
-                <Create card={card} />
-                <ViewCard card={card} />
+                <Create card={cards} addCard={addCard} />
+                <ViewCard card={cards} />
             </div>
 
             <div className={styles.footer}>
