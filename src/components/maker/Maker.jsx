@@ -2,46 +2,15 @@ import React, { useState, useEffect } from "react";
 import Footer from "../footer/Footer";
 import Header from "../header/Header";
 import styles from "./Maker.module.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Create from "../create/Create";
 import ViewCard from "../viewCard/ViewCard";
 
-function Maker({ authService, FileInput }) {
-    const [cards, setCards] = useState({
-        1: {
-            id: 1,
-            name: "chaewon1",
-            company: "none",
-            theme: "dark",
-            title: "engineer",
-            email: "codnjs779@naver.com",
-            message: "hello ",
-            fileName: "chch",
-            fileURL: null,
-        },
-        2: {
-            id: 2,
-            name: "chaewon2",
-            company: "none",
-            theme: "light",
-            title: "engineer",
-            email: "codnjs779@naver.com",
-            message: "hello ",
-            fileName: "chch",
-            fileURL: null,
-        },
-        3: {
-            id: 3,
-            name: "chaewon3",
-            company: "none",
-            theme: "colorful",
-            title: "engineer",
-            email: "codnjs779@naver.com",
-            message: "hello ",
-            fileName: "chch",
-            fileURL: "null",
-        },
-    });
+function Maker({ authService, FileInput, CardRepository }) {
+    const location = useLocation();
+    const locationState = location?.state;
+    const [cards, setCards] = useState({});
+    const [userId, setUserId] = useState(locationState && locationState.id);
 
     const navigate = useNavigate();
     const onLogout = () => {
@@ -49,8 +18,24 @@ function Maker({ authService, FileInput }) {
     };
 
     useEffect(() => {
+        if (!userId) {
+            return;
+        }
+        const stopSync = CardRepository.syncCards(userId, (cards) => {
+            setCards(cards);
+        });
+        // 언마운트 된 부분
+        return () => {
+            stopSync();
+        };
+    }, [userId]);
+
+    useEffect(() => {
         authService.onAuthChange((user) => {
-            if (!user) {
+            if (user) {
+                setUserId(user.uid);
+                console.log("userId", userId);
+            } else {
                 navigate("/");
             }
         });
@@ -62,6 +47,7 @@ function Maker({ authService, FileInput }) {
             updated[item.id] = item;
             return updated;
         });
+        CardRepository.saveCard(userId, item);
     };
 
     const deleteCard = (item) => {
@@ -70,6 +56,7 @@ function Maker({ authService, FileInput }) {
             delete updated[item.id];
             return updated;
         });
+        CardRepository.removeCard(userId, item);
     };
 
     return (
