@@ -1,8 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 import styles from "../image_fileInput/Image_fileInput.module.css";
 // 이미지 이름, 파일 바뀌면 불러줄 수 있는 콜백 필요
 function Image_fileInput({ imageUploader, name, onFileChange }) {
+    const [loading, setLoading] = useState(false);
+
     const inputRef = useRef();
     const onButtonClick = (e) => {
         // inpput 클릭시 페이지 업로드 되는 것 방지
@@ -10,8 +12,9 @@ function Image_fileInput({ imageUploader, name, onFileChange }) {
         inputRef.current.click();
     };
     const onChange = async (e) => {
+        setLoading(true);
         const uploaded = await imageUploader.upload(e.target.files[0]);
-        console.log(`uploaded`, uploaded);
+        setLoading(false);
         onFileChange({
             name: uploaded.original_filename,
             url: uploaded.url,
@@ -20,9 +23,12 @@ function Image_fileInput({ imageUploader, name, onFileChange }) {
     return (
         <div className={styles.container}>
             <input onChange={onChange} ref={inputRef} className={styles.input} type="file" accept="image/*" name="file"></input>
-            <button className={styles.button} onClick={onButtonClick}>
-                {name || "No file"}
-            </button>
+            {!loading && (
+                <button className={`${styles.button} ${name ? styles.pink : styles.grey}`} onClick={onButtonClick}>
+                    {name || "No file"}
+                </button>
+            )}
+            {loading && <div className={styles.loading}></div>}
         </div>
     );
 }
