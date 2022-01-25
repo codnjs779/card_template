@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Create from "../create/Create";
 import ViewCard from "../viewCard/ViewCard";
 
-function Maker({ authService }) {
+function Maker({ authService, FileInput }) {
     const [cards, setCards] = useState({
         1: {
             id: 1,
@@ -78,7 +78,7 @@ function Maker({ authService }) {
                 <Header onLogout={onLogout} />
             </div>
             <div className={styles.createAndPreview}>
-                <Create card={cards} createOrupdateCard={createOrupdateCard} deleteCard={deleteCard} />
+                <Create card={cards} createOrupdateCard={createOrupdateCard} deleteCard={deleteCard} FileInput={FileInput} />
                 <ViewCard card={cards} />
             </div>
 

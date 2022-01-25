@@ -5,12 +5,16 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import AuthService from "./service/authservice";
 import { BrowserRouter } from "react-router-dom";
+import ImageUploader from "./service/imageUploader";
+import Image_fileInput from "./components/image_fileInput/Image_fileInput";
 
 const authService = new AuthService();
+const imageUploader = new ImageUploader();
+const FileInput = (props) => <Image_fileInput {...props} imageUploader={imageUploader} />;
 
 ReactDOM.render(
     <BrowserRouter>
-        <App authService={authService} />
+        <App authService={authService} FileInput={FileInput} />
     </BrowserRouter>,
     document.getElementById("root")
 );
