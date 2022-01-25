@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, memo } from "react";
 
 import styles from "../image_fileInput/Image_fileInput.module.css";
 // 이미지 이름, 파일 바뀌면 불러줄 수 있는 콜백 필요
-function Image_fileInput({ imageUploader, name, onFileChange }) {
+const Image_fileInput = memo(({ imageUploader, name, onFileChange }) => {
     const [loading, setLoading] = useState(false);
 
     const inputRef = useRef();
@@ -31,6 +31,6 @@ function Image_fileInput({ imageUploader, name, onFileChange }) {
             {loading && <div className={styles.loading}></div>}
         </div>
     );
-}
+});
 
 export default Image_fileInput;

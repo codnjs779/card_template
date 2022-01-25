@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Footer from "../footer/Footer";
 import Header from "../header/Header";
 import styles from "./Maker.module.css";
@@ -13,9 +13,11 @@ function Maker({ authService, FileInput, CardRepository }) {
     const [userId, setUserId] = useState(locationState && locationState.id);
 
     const navigate = useNavigate();
-    const onLogout = () => {
+    // 렌더되어도 계속 동일한 데이터를 사용하고자 할 때 usecallback// prop변경, state변경등에 전혀 영향을 ㅂ안받고 한번 저장된 데이터를 계속 쓴다는 말
+    const onLogout = useCallback(() => {
         authService.logout();
-    };
+    }, [authService]);
+    //항상 동일한 함수를 쓰지만 대신 authService가 변화가 있을 때는 제외야 ! 하는 조건을 넣어줘야함
 
     useEffect(() => {
         if (!userId) {

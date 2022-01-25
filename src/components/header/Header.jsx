@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import styles from "./Header.module.css";
 import logo from "../../images/logo.png";
-function Header({ onLogout }) {
+const Header = memo(({ onLogout }) => {
     return (
         <header className={styles.header}>
             {onLogout && (
@@ -15,6 +15,6 @@ function Header({ onLogout }) {
             </div>
         </header>
     );
-}
+});
 
 export default Header;

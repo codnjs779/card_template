@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import styles from "./Card.module.css";
 import test from "../../images/defaultLogo.png";
 // const DEFAULT_IMAGE = "../../images/defaultLogo.png";
-function Card({ item }) {
+const Card = memo(({ item }) => {
     const { name, company, title, email, message, theme, fileName, fileURL } = item;
 
     const url = fileURL || test;
@@ -18,8 +18,7 @@ function Card({ item }) {
             </div>
         </li>
     );
-}
-
+});
 function getStyles(theme) {
     switch (theme) {
         case "dark":
