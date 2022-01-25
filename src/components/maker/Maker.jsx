@@ -28,18 +28,17 @@ function Maker({ authService, FileInput, CardRepository }) {
         return () => {
             stopSync();
         };
-    }, [userId]);
+    }, [userId, CardRepository]);
 
     useEffect(() => {
         authService.onAuthChange((user) => {
             if (user) {
                 setUserId(user.uid);
-                console.log("userId", userId);
             } else {
                 navigate("/");
             }
         });
-    });
+    }, [userId, navigate, authService]);
 
     const createOrupdateCard = (item) => {
         setCards((cards) => {
