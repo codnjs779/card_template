@@ -7,8 +7,8 @@ import Create from "../create/Create";
 import ViewCard from "../viewCard/ViewCard";
 
 function Maker({ authService }) {
-    const [cards, setCard] = useState([
-        {
+    const [cards, setCards] = useState({
+        1: {
             id: 1,
             name: "chaewon1",
             company: "none",
@@ -19,7 +19,7 @@ function Maker({ authService }) {
             fileName: "chch",
             fileURL: null,
         },
-        {
+        2: {
             id: 2,
             name: "chaewon2",
             company: "none",
@@ -30,7 +30,7 @@ function Maker({ authService }) {
             fileName: "chch",
             fileURL: null,
         },
-        {
+        3: {
             id: 3,
             name: "chaewon3",
             company: "none",
@@ -41,7 +41,8 @@ function Maker({ authService }) {
             fileName: "chch",
             fileURL: "null",
         },
-    ]);
+    });
+
     const navigate = useNavigate();
     const onLogout = () => {
         authService.logout();
@@ -54,17 +55,30 @@ function Maker({ authService }) {
             }
         });
     });
-    const addCard = (card) => {
-        const update = [...cards, card];
-        setCard(update);
+
+    const createOrupdateCard = (item) => {
+        setCards((cards) => {
+            const updated = { ...cards };
+            updated[item.id] = item;
+            return updated;
+        });
     };
+
+    const deleteCard = (item) => {
+        setCards((cards) => {
+            const updated = { ...cards };
+            delete updated[item.id];
+            return updated;
+        });
+    };
+
     return (
         <section className={styles.maker}>
             <div className={styles.header}>
                 <Header onLogout={onLogout} />
             </div>
             <div className={styles.createAndPreview}>
-                <Create card={cards} addCard={addCard} />
+                <Create card={cards} createOrupdateCard={createOrupdateCard} deleteCard={deleteCard} />
                 <ViewCard card={cards} />
             </div>
 

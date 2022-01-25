@@ -9,8 +9,8 @@ function ViewCard({ card }) {
             <h1 className={styles.title}>Preview</h1>
             <ul className={styles.cards}>
                 {" "}
-                {card.map((item) => (
-                    <Card item={item} />
+                {Object.keys(card).map((key) => (
+                    <Card key={key} item={card[key]} />
                 ))}
             </ul>
         </section>
